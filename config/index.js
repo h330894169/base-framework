@@ -17,7 +17,7 @@ module.exports = {
 
 
     // 客户端配置
-    publicPath: '//cdn.com/',
+    publicPath: '/DSY',
     srcPath: path.resolve(projectDir, './client'),
     outputPath: path.resolve(projectDir, './static'),
     target: 'web'

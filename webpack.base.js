@@ -32,14 +32,15 @@ module.exports = {
       loader: 'vue-loader',
       // vue-loader options goes here
       options: {
-          extractCSS: true,
-          scss: 'vue-style-loader!postcss-loader!css-loader!sass-loader', // <style lang="scss">
-          sass: 'vue-style-loader!postcss-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
-          stylus: 'vue-style-loader!postcss-loader!css-loader!stylus-loader', // <style lang="stylus">
+          extractCSS: false,
+          scss: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader', // <style lang="scss">
+          sass: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
+          stylus: 'vue-style-loader!postcss-loader!style-loader!css-loader!stylus-loader', // <style lang="stylus">
       }
     }, {
       test: /\.js$/,
-      loaders: ['babel-loader']
+      loaders: ['babel-loader'],
+      exclude: /node_modules/
     }, {
       test: /\.es6$/,
       loaders: ['babel-loader']
@@ -63,25 +64,19 @@ module.exports = {
     },
     {
         test: /\.scss$/,
-        use: ['css-loader','postcss-loader','sass-loader']
+        use: ['style-loader','css-loader','postcss-loader','sass-loader']//ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader'])
     },
     {
         test: /\.sass$/,
-        use: ['css-loader','postcss-loader','sass-loader?indentedSyntax']
+        use: ['style-loader','css-loader','postcss-loader','sass-loader?indentedSyntax']//ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader?indentedSyntax'])
     },
     {
         test: /\.(stylus|styl)$/,
-        use: ['css-loader','postcss-loader','stylus-loader']
+        use: ['style-loader','css-loader','postcss-loader','stylus-loader']//ExtractTextPlugin.extract(['css-loader','postcss-loader','stylus-loader'])
     },
     {
         test: /\.css$/,
-        use:
-            ExtractTextPlugin.extract({
-             use: [
-                 'css-loader',
-                 'postcss-loader'
-             ]
-        })
+        use: ['style-loader', 'css-loader','postcss-loader']// ExtractTextPlugin.extract(['style-loader', 'css-loader','postcss-loader'])
         /**
         [
             //'sass-loader',
@@ -102,7 +97,6 @@ module.exports = {
                     ]
                 }
             }
-
         ]**/
     }
     ]
@@ -116,7 +110,7 @@ module.exports = {
       filename: "index.html",
       chunks: ['manifest', 'vendor', 'client']
     }),
-      new ExtractTextPlugin("style.css")
+      //new ExtractTextPlugin("style.css")
     // new webpack.LoaderOptionsPlugin(_.loadersOptions())
   ],
   target: config.target

@@ -1,23 +1,22 @@
 <template>
     <div>
-        <header-component/>
-        <div>this is template body</div>
-        <other-component/>
+        <div>this is template body
+<br>
+
+            {{msg}}</div><a>link</a>
     </div>
 </template>
 <style lang="scss">
-    @import "test.scss";
     body{
-        background-color:#ff0000;
-        transform: translateX(1011px);
+        color: red;
+        transform: translateX(12px);
     }
 </style>
 <script>
-    import './test.scss'
     export default {
         data() {
             return {
-                msg:'hello vue'
+                msg:'hello 222vue'
             };
         },
         components: {

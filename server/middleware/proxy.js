@@ -1,6 +1,7 @@
 /**
  * Created by jerryli on 2017/6/15.
  */
+'use strict';
 const httpProxy = require('http-proxy');
 const conf = require('../../config');
 const log  = require('../utils/logFactory').getLogger('proxy');

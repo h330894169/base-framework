@@ -1,6 +1,7 @@
 {
   "verbose": false,
   "watch": [
+    "webpack.base.js",
     "app.js",
     "server",
     "build",

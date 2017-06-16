@@ -8,6 +8,8 @@ const koaBody = require('koa-body');
 const router = require('./routers/index');
 
 const app = new Koa();
+// 顺序很关键
+require('./middleware/webpack-load')(app);
 
 app.use(koaBody());
 
