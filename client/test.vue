@@ -8,7 +8,7 @@
 </template>
 <style lang="scss">
     body{
-        color: red;
+        color: #fff;
         transform: translateX(12px);
     }
 </style>

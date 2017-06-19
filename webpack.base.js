@@ -3,8 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+
 // const locals = require('../server/utils/cfg-factory').getConfig('locals');
 
 module.exports = {
@@ -30,9 +29,9 @@ module.exports = {
     rules: [{
       test: /\.vue$/,
       loader: 'vue-loader',
-      // vue-loader options goes here
+      // vue-loader options goes  here
       options: {
-          extractCSS: false,
+          // extractCSS: false,
           scss: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader', // <style lang="scss">
           sass: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
           stylus: 'vue-style-loader!postcss-loader!style-loader!css-loader!stylus-loader', // <style lang="stylus">
@@ -61,44 +60,23 @@ module.exports = {
     }, {
       test: /\.pug$/,
       loaders: 'pug-loader'
-    },
+    },/**
     {
         test: /\.scss$/,
-        use: ['style-loader','css-loader','postcss-loader','sass-loader']//ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader'])
+        use: ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader'])//['style-loader','css-loader?importLoaders: 1','postcss-loader','sass-loader']//
     },
     {
         test: /\.sass$/,
-        use: ['style-loader','css-loader','postcss-loader','sass-loader?indentedSyntax']//ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader?indentedSyntax'])
+        use: ExtractTextPlugin.extract(['css-loader','postcss-loader','sass-loader?indentedSyntax'])//['style-loader','css-loader?importLoaders: 1','postcss-loader','sass-loader?indentedSyntax']//
     },
     {
         test: /\.(stylus|styl)$/,
-        use: ['style-loader','css-loader','postcss-loader','stylus-loader']//ExtractTextPlugin.extract(['css-loader','postcss-loader','stylus-loader'])
+        use: ['style-loader','css-loader?importLoaders: 1','postcss-loader','stylus-loader']//ExtractTextPlugin.extract(['css-loader','postcss-loader','stylus-loader'])
     },
-    {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader','postcss-loader']// ExtractTextPlugin.extract(['style-loader', 'css-loader','postcss-loader'])
-        /**
-        [
-            //'sass-loader',
-            //'sass-loader?indentedSyntax',
-            'style-loader',
-            'css-loader',
-            'postcss-loader',
-
-            {
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true,
-                    config: {
-                        // path:path.resolve(config.projectDir,'../config/postcss.config.js'),
-                    },//
-                    plugins: (loader) => [
-                        require('autoprefixer')(),
-                    ]
-                }
-            }
-        ]**/
-    }
+         {
+             test: /\.css$/,
+             use:  ['style-loader', 'css-loader?importLoaders: 1','postcss-loader']//ExtractTextPlugin.extract({use:[ 'css-loader','postcss-loader'],fallback: 'style-loader'})//
+         }**/
     ]
   },
   plugins: [
@@ -110,8 +88,28 @@ module.exports = {
       filename: "index.html",
       chunks: ['manifest', 'vendor', 'client']
     }),
-      //new ExtractTextPlugin("style.css")
     // new webpack.LoaderOptionsPlugin(_.loadersOptions())
   ],
   target: config.target
 };
+/***
+ *  /**[
+ //'sass-loader',
+ //'sass-loader?indentedSyntax',
+ 'style-loader',
+ 'css-loader',
+ 'postcss-loader',
+
+ {
+     loader: 'postcss-loader',
+     options: {
+         sourceMap: true,
+         config: {
+             // path:path.resolve(config.projectDir,'../config/postcss.config.js'),
+         },//
+         plugins: (loader) => [
+             require('autoprefixer')(),
+         ]
+     }
+ }
+ ]**/

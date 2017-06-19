@@ -1,11 +1,12 @@
 /**
  * Created by jerryli on 2017/6/16.
  */
+'use strict';
 const webpack = require('webpack');
 const chalk = require('chalk');
 const koaWebpack = require('koa-webpack');
 const config = require('../../config');
-const webpackConfig = require('../../webpack.base');
+const webpackConfig = require('../../webpack.dev');
 
 webpackConfig.entry.client = [
     'webpack-hot-middleware/client?reload=true',

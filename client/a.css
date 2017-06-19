@@ -1,7 +1,7 @@
 .body{
-    color: red;
-    background: red;
+    background: beige;
     transform: translateX(20px);
+    background: url(./note_ico.png);
 }
 a{
     color: rebeccapurple!important;

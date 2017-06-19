@@ -4,10 +4,11 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
-const OfflinePlugin = require('offline-plugin');
+// const OfflinePlugin = require('offline-plugin');
 const base = require('./webpack.base');
+const styleLoaders = require('./config/style-loader-util');
 // const pkg = require('../package');
-const _ = require('./utils');
+// const _ = require('./utils');
 // const config = require('./config');
 
 // exec('rm -rf dist/');
@@ -15,12 +16,16 @@ const _ = require('./utils');
 base.devtool = 'source-map';
 
 // use hash filename to support long-term caching
-base.output.filename = '[name].[hash:8].js';
-
+base.output.filename = 'js/[name].[hash:8].js';
+base.module.rules[0].options.extractCSS = true;
+base.module.rules = base.module.rules.concat(styleLoaders.styleLoaders({
+    extract: true,
+    sourceMap: true
+}));
 // add webpack plugins
 base.plugins.push(
   new ProgressPlugin(),
-  new ExtractTextPlugin('styles.[contenthash:8].css'),
+  new ExtractTextPlugin('css/styles.[contenthash:8].css'),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('production')
   }),
@@ -42,18 +47,20 @@ base.plugins.push(
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest'
-  }),
+  })
   // progressive web app
   // it uses the publicPath in webpack config
-  new OfflinePlugin({
+  /**
+    new OfflinePlugin({
     relativePaths: false,
     AppCache: false,
     ServiceWorker: {
       events: true
     }
   })
+   **/
 );
-
+/**
 // extract css in standalone css files
 _.cssProcessors.forEach(processor => {
   let loaders;
@@ -70,7 +77,7 @@ _.cssProcessors.forEach(processor => {
     })
   });
 });
-
+**/
 // minimize webpack output
 base.stats = {
   // Add children information
@@ -82,5 +89,6 @@ base.stats = {
   chunkOrigins: false,
   modules: false
 };
+
 
 module.exports = base;

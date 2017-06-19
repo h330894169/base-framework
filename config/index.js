@@ -17,7 +17,8 @@ module.exports = {
 
 
     // 客户端配置
-    publicPath: '/DSY',
+    DYN_JS_PATH: "/",
+    publicPath: '/',
     srcPath: path.resolve(projectDir, './client'),
     outputPath: path.resolve(projectDir, './static'),
     target: 'web'
