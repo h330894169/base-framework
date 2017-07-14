@@ -3,5 +3,5 @@
  */
 'use strict';
 module.exports = (router, ctrl) => {
-    router.get('/', ctrl.info);
+    router.get('/info', ctrl.info);
 }

@@ -6,8 +6,10 @@ const path = require('path');
 const projectDir = process.cwd();
 
 module.exports = {
+    isDev: process.env.NODE_ENV !== 'production',
+
     // 服务端配置
-    port: 3000,
+    port: 3800,
     projectDir :  projectDir,
     logConfPath: path.resolve(projectDir, './config/log4js.json'),
     staticFile: path.resolve(projectDir, './static'),

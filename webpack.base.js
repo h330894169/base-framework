@@ -4,7 +4,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config');
 
-// const locals = require('../server/utils/cfg-factory').getConfig('locals');
 
 module.exports = {
   entry: {
@@ -32,8 +31,8 @@ module.exports = {
       // vue-loader options goes  here
       options: {
           // extractCSS: false,
-          scss: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader', // <style lang="scss">
-          sass: 'vue-style-loader!postcss-loader!style-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
+          scss: 'vue-style-loader!postcss-loader!style-loader!css-loader!resolve-url-loader!sass-loader', // <style lang="scss">
+          sass: 'vue-style-loader!postcss-loader!style-loader!css-loader!resolve-url-loader!sass-loader?indentedSyntax', // <style lang="sass">
           stylus: 'vue-style-loader!postcss-loader!style-loader!css-loader!stylus-loader', // <style lang="stylus">
       }
     }, {
@@ -82,34 +81,11 @@ module.exports = {
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new HtmlWebpackPlugin({
-      // title: config.title,
-      // locals: locals,
+      minify: !config.isDev ? { minifyJS: true, minifyCss:true } : {},
       template: path.resolve(config.projectDir, './client/index.html'),
       filename: "index.html",
       chunks: ['manifest', 'vendor', 'client']
-    }),
-    // new webpack.LoaderOptionsPlugin(_.loadersOptions())
+    })
   ],
   target: config.target
 };
-/***
- *  /**[
- //'sass-loader',
- //'sass-loader?indentedSyntax',
- 'style-loader',
- 'css-loader',
- 'postcss-loader',
-
- {
-     loader: 'postcss-loader',
-     options: {
-         sourceMap: true,
-         config: {
-             // path:path.resolve(config.projectDir,'../config/postcss.config.js'),
-         },//
-         plugins: (loader) => [
-             require('autoprefixer')(),
-         ]
-     }
- }
- ]**/

@@ -2,14 +2,15 @@
  * Created by jerryli on 2017/6/15.
  */
 'use strict';
-var img = require('./note_ico.png');
 import Vue from 'vue';
-import './a.css'
-import t from './test.vue'
-// import './test.scss'
-import './tt.sass'
-import './aaa.styl'
-console.log(t);
-console.log(122);
+import 'babel-polyfill';
+import index from  './modules/lottery/index';
+import store from './stores';
+import mixins from './modules/common/js/mixin';
+import fastclick from 'fastclick';
 
-new Vue({...t}).$mount("#app")
+fastclick.attach(document.body);
+
+Vue.mixin(mixins);
+
+new Vue({...index, store}).$mount("#app")

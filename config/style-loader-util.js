@@ -26,11 +26,12 @@ exports.styleLoaders = options => {
     }
 
     let styleMap = {
-        scss: generateLoaders(['css-loader?importLoaders=1','postcss-loader','sass-loader']),
-        sass: generateLoaders(['css-loader?importLoaders=1','postcss-loader','sass-loader?indentedSyntax']),
-        stylus: generateLoaders(['css-loader?importLoaders=1','postcss-loader','stylus-loader']),
-        styl: generateLoaders(['css-loader?importLoaders=1','postcss-loader','stylus-loader']),
-        css: generateLoaders([ 'css-loader?importLoaders=1','postcss-loader'])
+        //后期 重构  resolve-url-loader 解决相对路径的问题 后面必须带上sourceMap
+        scss: generateLoaders(['css-loader?importLoaders=1&minimize=true','postcss-loader','resolve-url-loader','sass-loader?sourceMap']),
+        sass: generateLoaders(['css-loader?importLoaders=1&minimize=true','postcss-loader','resolve-url-loader','sass-loader?indentedSyntax&sourceMap']),
+        stylus: generateLoaders(['css-loader?importLoaders=1&minimize=true','postcss-loader','stylus-loader']),
+        styl: generateLoaders(['css-loader?importLoaders=1&minimize=true','postcss-loader','stylus-loader']),
+        css: generateLoaders([ 'css-loader?importLoaders=1&minimize=true','postcss-loader'])
     };
     const result = [];
     for(extension in styleMap) {

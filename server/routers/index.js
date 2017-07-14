@@ -11,7 +11,7 @@ const path = require('path');
 
 router.get('*',async (ctx, next) =>{
     log.info(ctx.url);
-    next()
+    await next()
 });
 
 //TODO 这里遍历route目录注册路由，同时，绑定对应的controller

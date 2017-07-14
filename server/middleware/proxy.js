@@ -7,6 +7,14 @@ const conf = require('../../config');
 const log  = require('../utils/logFactory').getLogger('proxy');
 const proxy = httpProxy.createProxyServer({});
 module.exports = (app) => {
+  /**
+  app.use(async (ctx,next)=>{
+    await proxy.web(ctx.req, ctx.res, {
+      target: conf.proxyTarget
+    });
+    await next();
+  });
+   **/
      return (req, res) => {
         if (req.url.indexOf(conf.restPrefix) !== -1) {
             log.info(`proxy-url:${req.url}`);
